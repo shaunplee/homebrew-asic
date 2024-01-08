@@ -5,7 +5,13 @@ class MagicVlsi < Formula
   sha256 "ef17c343c89ac54699f87f6c853ec7e4814f322734bd3b54a157a7d95cab905a"
   license "MIT"
 
-  # depends_on "mesa"
+  # magic crashes on start with a BadMatch error:
+  ### X Error of failed request:  BadMatch (invalid parameter attributes)
+  ### Major opcode of failed request:  149 (GLX)
+  ### Minor opcode of failed request:  27 (X_GLXCreatePbuffer)
+  # So let's not use OpenGL
+  # depends_on "mesa" => :build
+  # depends_on "mesa-glu" => :build
 
   resource "tcl" do
     url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.13/tcl8.6.13-src.tar.gz"
@@ -56,7 +62,7 @@ class MagicVlsi < Formula
            "--with-tk=#{lib}/tcl-tk/lib",
            "--x-includes=/usr/X11/include",
            "--x-libraries=/usr/X11/lib",
-           "--with-opengl=no",
+           "--with-opengl=no", # disable OpenGL
            "--disable-silent-rules", *std_configure_args
     ENV["CFLAGS"] = "-Wno-error=implicit-function-declaration"
     system "make"
