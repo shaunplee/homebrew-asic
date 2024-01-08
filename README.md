@@ -6,6 +6,7 @@ This is a Homebrew tap for various ASIC design tools, as used in the Zero to ASI
 
 ## Magic
 https://github.com/RTimothyEdwards/magic
+
 http://opencircuitdesign.com/magic/
 
 Magic includes its own copy of Tcl/Tk because the homebrew version is built `without-x`.
