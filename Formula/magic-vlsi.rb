@@ -42,6 +42,7 @@ class MagicVlsi < Formula
                *tcl_tk_args
         system "make"
         system "make", "install"
+        system "make", "install-private-headers"
       end
 
       ENV.prepend_path "PATH", bin
@@ -62,6 +63,7 @@ class MagicVlsi < Formula
 
           system "make"
           system "make", "install"
+          system "make", "install-private-headers"
         end
       end
     end
