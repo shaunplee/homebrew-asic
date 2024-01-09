@@ -69,6 +69,13 @@ class MagicVlsi < Formula
     system "make", "install"
   end
 
+  def caveats
+    <<~EOS
+      This package has an implicit dependency on the xquartz cask.
+      Please 'brew install xquartz' before installing.
+    EOS
+  end
+
   test do
     # `test do` will create, run in and delete a temporary directory.
     #
