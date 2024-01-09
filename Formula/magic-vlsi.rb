@@ -31,7 +31,7 @@ class MagicVlsi < Formula
 
     resource("tcl").stage do
       tcl_tk_args = %W[
-        --prefix=#{prefix}
+        --prefix=#{prefix}/tcl-tk
         --includedir=#{include}/tcl-tk
         --mandir=#{man}
         --enable-threads
@@ -49,7 +49,7 @@ class MagicVlsi < Formula
       resource("tk").stage do
         cd "unix" do
           system "./configure",
-                 "--with-tcl=#{lib}/tcl-tk/lib",
+                 "--with-tcl=#{prefix}/tcl-tk/lib",
                  "--enable-xss=no",
                  "--with-x",
                  "--x-includes=/usr/X11/include",
@@ -68,8 +68,8 @@ class MagicVlsi < Formula
 
     system "./configure",
            "--prefix=#{prefix}",
-           "--with-tcl=#{lib}/tcl-tk/lib",
-           "--with-tk=#{lib}/tcl-tk/lib",
+           "--with-tcl=#{prefix}/tcl-tk/lib",
+           "--with-tk=#{prefix}/tcl-tk/lib",
            "--x-includes=/usr/X11/include",
            "--x-libraries=/usr/X11/lib",
            "--with-opengl=no", # disable OpenGL
