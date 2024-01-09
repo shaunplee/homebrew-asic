@@ -65,9 +65,9 @@ class MagicVlsi < Formula
            "--x-libraries=/usr/X11/lib",
            "--with-opengl=no", # disable OpenGL
            "--disable-silent-rules",
+           "CFLAGS=-Wno-implicit-function-declaration",
            "PYTHON3=#{Formula["python3"].bin}/python3",
            *std_configure_args
-    ENV["CFLAGS"] = "-Wno-error=implicit-function-declaration"
     system "make"
     system "make", "install"
   end
