@@ -32,14 +32,14 @@ class MagicVlsi < Formula
     resource("tcl").stage do
       tcl_tk_args = %W[
         --prefix=#{prefix}/tcl-tk
-        --includedir=#{include}/tcl-tk
         --mandir=#{man}
         --enable-threads
         --enable-64bit
       ]
 
       cd "unix" do
-        system "./configure", *tcl_tk_args
+        system "./configure",
+               *tcl_tk_args
         system "make"
         system "make", "install"
       end
@@ -52,13 +52,13 @@ class MagicVlsi < Formula
                  "--with-tcl=#{prefix}/tcl-tk/lib",
                  "--enable-xss=no",
                  "--with-x",
-                 "--x-includes=/usr/X11/include",
-                 "--x-libraries=/usr/X11/lib",
+                 "--x-includes=/opt/X11/include",
+                 "--x-libraries=/opt/X11/lib",
                  *tcl_tk_args
 
           inreplace "Makefile",
                     /^LIB_RUNTIME_DIR[^\n]*$/,
-                    "LIB_RUNTIME_DIR		= $(libdir)"
+                    "LIB_RUNTIME_DIR = $(libdir)"
 
           system "make"
           system "make", "install"
@@ -70,8 +70,8 @@ class MagicVlsi < Formula
            "--prefix=#{prefix}",
            "--with-tcl=#{prefix}/tcl-tk/lib",
            "--with-tk=#{prefix}/tcl-tk/lib",
-           "--x-includes=/usr/X11/include",
-           "--x-libraries=/usr/X11/lib",
+           "--x-includes=/opt/X11/include",
+           "--x-libraries=/opt/X11/lib",
            "--with-opengl=no", # disable OpenGL
            "--disable-silent-rules",
            "CFLAGS=-Wno-implicit-function-declaration",
