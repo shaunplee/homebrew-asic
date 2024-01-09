@@ -1,7 +1,8 @@
 class MagicVlsi < Formula
+  version '8.3.456'
   desc "VLSI layout tool written in Tcl"
   homepage "http://opencircuitdesign.com/magic/"
-  url "https://github.com/RTimothyEdwards/magic/archive/refs/tags/8.3.456.tar.gz"
+  url "https://github.com/RTimothyEdwards/magic/archive/refs/tags/#{version}.tar.gz"
   sha256 "ef17c343c89ac54699f87f6c853ec7e4814f322734bd3b54a157a7d95cab905a"
   license "MIT"
 
@@ -80,17 +81,6 @@ class MagicVlsi < Formula
   end
 
   test do
-    # `test do` will create, run in and delete a temporary directory.
-    #
-    # This test will fail and we won't accept that! For Homebrew/homebrew-core
-    # this will need to be a test that verifies the functionality of the
-    # software. Run the test with `brew test magic-vlsi`. Options passed
-    # to `brew install` such as `--HEAD` also need to be provided to `brew test`.
-    #
-    # The installed folder is not in the path, so use the entire path to any
-    # executables being tested: `system "#{bin}/program", "do", "something"`.
-
-    # TODO: write a real test
-    system "magic --version"
+    assert_match version, shell_output("#{bin}/magic --version", 0)
   end
 end
