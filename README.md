@@ -22,3 +22,16 @@ X Error of failed request:  BadMatch (invalid parameter attributes)
   Current serial number in output stream:  7801
 ```
 So I've left OpenGL out and configured `magic` with `--with-opengl=no` so that we don't need the `mesa` and `mesa-glu`.
+
+## ngspice
+Per the MPW9 install guide, the ngspice formula builds version 36.
+
+There is an issue with proper font support with the error message:
+```
+/opt/homebrew/include/X11/Xft/Xft.h:40:10: fatal error: 'ft2build.h' file not found
+```
+So ngspice is built without a dependency on Xft. This seems to cause warnings during use, like:
+```
+Warning: Unable to load any usable fontset
+```
+but it seems to be otherwise functional.
