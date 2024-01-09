@@ -30,8 +30,16 @@ class MagicVlsi < Formula
     ENV.deparallelize  # if your formula fails when building in parallel
 
     resource("tcl").stage do
+      tcl_tk_args = %W[
+        --prefix=#{prefix}
+        --includedir=#{include}/tcl-tk
+        --mandir=#{man}
+        --enable-threads
+        --enable-64bit
+      ]
+
       cd "unix" do
-        system "./configure", "--prefix=#{lib}/tcl-tk"
+        system "./configure", *tcl_tk_args
         system "make"
         system "make", "install"
       end
@@ -41,12 +49,12 @@ class MagicVlsi < Formula
       resource("tk").stage do
         cd "unix" do
           system "./configure",
-                 "--prefix=#{lib}/tcl-tk",
                  "--with-tcl=#{lib}/tcl-tk/lib",
-                 "--with-x",
                  "--enable-xss=no",
+                 "--with-x",
                  "--x-includes=/usr/X11/include",
-                 "--x-libraries=/usr/X11/lib"
+                 "--x-libraries=/usr/X11/lib",
+                 *tcl_tk_args
 
           inreplace "Makefile",
                     /^LIB_RUNTIME_DIR[^\n]*$/,
