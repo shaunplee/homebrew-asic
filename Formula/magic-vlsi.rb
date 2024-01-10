@@ -32,7 +32,6 @@ class MagicVlsi < Formula
     resource("tcl").stage do
       tcl_tk_args = %W[
         --prefix=#{prefix}/tcl-tk
-        --mandir=#{man}
         --enable-threads
         --enable-64bit
       ]
