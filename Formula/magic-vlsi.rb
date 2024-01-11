@@ -17,7 +17,7 @@ class MagicVlsi < Formula
   depends_on "libxmu"
   depends_on "libxrender"
   depends_on :macos
-  depends_on "python@3.12"
+#  depends_on "python3"
   depends_on "shaunplee/asic/tcl-tk-with-x"
 
   def install
@@ -37,7 +37,7 @@ class MagicVlsi < Formula
            "--with-opengl=no", # disable OpenGL
            "--disable-silent-rules",
            "CFLAGS=-Wno-implicit-function-declaration",
-           "PYTHON3=#{Formula["python@3.12"].opt_bin}/python3",
+#           "PYTHON3=#{Formula["python3"].opt_bin}/python3",
            *std_configure_args
     system "make"
     system "make", "install"
