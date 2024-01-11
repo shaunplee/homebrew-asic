@@ -1,13 +1,12 @@
 class MagicVlsi < Formula
-  version '8.3.456'
   desc "VLSI layout tool written in Tcl"
+  version "8.3.456"
   homepage "http://opencircuitdesign.com/magic/"
   url "https://github.com/RTimothyEdwards/magic/archive/refs/tags/#{version}.tar.gz"
   sha256 "ef17c343c89ac54699f87f6c853ec7e4814f322734bd3b54a157a7d95cab905a"
   license "MIT"
 
-  depends_on :macos
-
+  depends_on "cairo"
   depends_on "fontconfig"
   depends_on "freetype"
   depends_on "libglu"
@@ -17,8 +16,9 @@ class MagicVlsi < Formula
   depends_on "libxi"
   depends_on "libxmu"
   depends_on "libxrender"
+  depends_on "python3"
 
-  depends_on "python3" => :build
+  depends_on :macos
 
   resource "tcl" do
     url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.13/tcl8.6.13-src.tar.gz"
@@ -32,7 +32,7 @@ class MagicVlsi < Formula
   end
 
   def install
-    ENV.deparallelize  # if your formula fails when building in parallel
+    ENV.deparallelize
 
     resource("tcl").stage do
       tcl_tk_args = %W[
@@ -86,7 +86,6 @@ class MagicVlsi < Formula
            "--x-libraries=/opt/X11/lib",
            "--with-opengl=no", # disable OpenGL
            "--disable-silent-rules",
-
            "CFLAGS=-Wno-implicit-function-declaration",
            "PYTHON3=#{Formula["python3"].bin}/python3",
            *std_configure_args
@@ -102,6 +101,6 @@ class MagicVlsi < Formula
   end
 
   test do
-    assert_match version, shell_output("#{bin}/magic --version", 0)
+    assert_match version, shell_output("#{bin}/magic --version")
   end
 end
