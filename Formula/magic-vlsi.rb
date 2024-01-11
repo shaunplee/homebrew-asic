@@ -6,14 +6,18 @@ class MagicVlsi < Formula
   sha256 "ef17c343c89ac54699f87f6c853ec7e4814f322734bd3b54a157a7d95cab905a"
   license "MIT"
 
-  # magic crashes on start with a BadMatch error:
-  ### X Error of failed request:  BadMatch (invalid parameter attributes)
-  ### Major opcode of failed request:  149 (GLX)
-  ### Minor opcode of failed request:  27 (X_GLXCreatePbuffer)
-  # So let's not use OpenGL
-  # depends_on "mesa" => :build
-  # depends_on "mesa-glu" => :build
+  depends_on :macos
+
+  depends_on "fontconfig"
+  depends_on "freetype"
+  depends_on "libglu"
+  depends_on "libice"
   depends_on "libx11"
+  depends_on "libxext"
+  depends_on "libxi"
+  depends_on "libxmu"
+  depends_on "libxrender"
+  depends_on "mesa"
   depends_on "python3"
 
   resource "tcl" do
