@@ -6,24 +6,26 @@ class TclTkWithX < Formula
   sha256 "43a1fae7412f61ff11de2cfd05d28cfc3a73762f354a417c62370a54e2caf066"
   license "TCL"
   revision 5
-  keg_only "to avoid conflicts with homebrew core/tcl-tk"
 
   livecheck do
     url :stable
     regex(%r{url=.*?/(?:tcl|tk).?v?(\d+(?:\.\d+)+)[._-]src\.t}i)
   end
 
+  keg_only "to avoid conflicts with homebrew core/tcl-tk"
+
   depends_on "libx11"
 
   resource "tk" do
     url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.13/tk8.6.13-src.tar.gz"
     mirror "https://fossies.org/linux/misc/tk8.6.13-src.tar.gz"
-    sha256 "2e65fa069a23365440a3c56c556b8673b5e32a283800d8d9b257e3f584ce0675";
+    sha256 "2e65fa069a23365440a3c56c556b8673b5e32a283800d8d9b257e3f584ce0675"
   end
 
   def install
     args = %W[
       --prefix=#{prefix}
+      --mandir=#{man}
       --enable-threads
       --enable-64bit
     ]
@@ -45,7 +47,7 @@ class TclTkWithX < Formula
                "--with-x"
         inreplace "Makefile",
                   /^LIB_RUNTIME_DIR[^\n]*$/,
-                  "LIB_RUNTIME_DIR		= \$(libdir)"
+                  "LIB_RUNTIME_DIR		= $(libdir)"
         system "make"
         system "make", "install"
         system "make", "install-private-headers"
