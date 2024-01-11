@@ -42,8 +42,7 @@ class TclTkWithX < Formula
       cd "unix" do
         system "./configure", *args,
                "--with-tcl=#{lib}",
-               "--with-x",
-               "--enable-xss=no"
+               "--with-x"
         inreplace "Makefile",
                   /^LIB_RUNTIME_DIR[^\n]*$/,
                   "LIB_RUNTIME_DIR		= \$(libdir)"
