@@ -59,6 +59,7 @@ class MagicVlsi < Formula
                  "--with-x",
                  "--x-includes=/opt/X11/include",
                  "--x-libraries=/opt/X11/lib",
+                 "CFLAGS=-I/opt/X11/include",
                  *tcl_tk_args
 
           inreplace "Makefile",
