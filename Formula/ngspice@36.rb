@@ -9,7 +9,6 @@ class NgspiceAT36 < Formula
 
     depends_on "autoconf" => :build
     depends_on "automake" => :build
-    depends_on "bison" => :build
     depends_on "libtool" => :build
   end
 
@@ -29,6 +28,7 @@ class NgspiceAT36 < Formula
   depends_on "readline"
 
   uses_from_macos "bison" => :build
+  uses_from_macos "flex" => :build
 
   def install
     system "./autogen.sh" if build.head?
@@ -41,14 +41,6 @@ class NgspiceAT36 < Formula
     ENV["CPPFLAGS"] = " -I#{Formula["freetype"].opt_include}/freetype2"
     system "./configure", *args, *std_configure_args
     system "make", "install"
-
-    # fix references to libs
-    inreplace pkgshare/"scripts/spinit",
-              lib/"ngspice/",
-              Formula["libngspice"].opt_lib/"ngspice/"
-
-    # remove conflict lib files with libngspice
-    rm_rf Dir[lib/"ngspice"]
   end
 
   test do
