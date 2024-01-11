@@ -16,21 +16,36 @@ class NgspiceAT36 < Formula
   conflicts_with "ngspice"
 
   depends_on "fftw"
-  depends_on "readline"
+  depends_on "fontconfig"
+  depends_on "freetype"
   depends_on "libx11"
+  depends_on "libxaw"
+  depends_on "libxext"
+  depends_on "libxft"
+  depends_on "libxmu"
+  depends_on "libxrender"
+  depends_on "libxt"
+  depends_on "ncurses"
+  depends_on "readline"
+
+  uses_from_macos "bison" => :build
 
   def install
     system "./autogen.sh" if build.head?
 
     args = %W[
-      --disable-dependency-tracking
-      --prefix=#{prefix}
       --with-readline=yes
       --enable-xspice
     ]
 
-    system "./configure", *args
+    ENV["CPPFLAGS"] = " -I#{Formula["freetype"].opt_include}/freetype2"
+    system "./configure", *args, *std_configure_args
     system "make", "install"
+
+    # fix references to libs
+    inreplace pkgshare/"scripts/spinit",
+              lib/"ngspice/",
+              Formula["libngspice"].opt_lib/"ngspice/"
 
     # remove conflict lib files with libngspice
     rm_rf Dir[lib/"ngspice"]
