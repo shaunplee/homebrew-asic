@@ -1,4 +1,6 @@
 class MagicVlsi < Formula
+  include Language::Python::Virtualenv
+
   desc "VLSI layout tool written in Tcl"
   homepage "http://opencircuitdesign.com/magic/"
   url "https://github.com/RTimothyEdwards/magic/archive/refs/tags/8.3.456.tar.gz"
@@ -17,12 +19,13 @@ class MagicVlsi < Formula
   depends_on "libxmu"
   depends_on "libxrender"
   depends_on :macos
-#  depends_on "python3"
+  depends_on "python3"
   depends_on "shaunplee/asic/tcl-tk-with-x"
 
   def install
     ENV.deparallelize
     tcltk = Formula["shaunplee/asic/tcl-tk-with-x"]
+    virtualenv_create(libexec, "python3")
 
     # magic crashes on start with a BadMatch error:
     ### X Error of failed request:  BadMatch (invalid parameter attributes)
@@ -37,7 +40,7 @@ class MagicVlsi < Formula
            "--with-opengl=no", # disable OpenGL
            "--disable-silent-rules",
            "CFLAGS=-Wno-implicit-function-declaration",
-#           "PYTHON3=#{Formula["python3"].opt_bin}/python3",
+           "PYTHON3=#{libexec}/bin/python3",
            *std_configure_args
     system "make"
     system "make", "install"
