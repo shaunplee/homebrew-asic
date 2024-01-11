@@ -4,7 +4,6 @@ class MagicVlsi < Formula
   desc "VLSI layout tool written in Tcl"
   homepage "http://opencircuitdesign.com/magic/"
   url "https://github.com/RTimothyEdwards/magic/archive/refs/tags/8.3.456.tar.gz"
-  version "8.3.456"
   sha256 "ef17c343c89ac54699f87f6c853ec7e4814f322734bd3b54a157a7d95cab905a"
   license "MIT"
 
@@ -54,6 +53,6 @@ class MagicVlsi < Formula
   end
 
   test do
-    assert_match version, shell_output("#{bin}/magic --version")
+    assert_match version.to_s, shell_output("#{bin}/magic --version").strip
   end
 end
