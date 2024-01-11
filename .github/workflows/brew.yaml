@@ -1,0 +1,16 @@
+name: brew
+on:
+  push:
+    branches-ignore: [master]
+    paths:
+    - Formula/*
+
+jobs:
+  tests:
+    runs-on: [macos-13]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v3
+      - run: |
+          brew tap shaunplee/asic-dev .
+          make tests/formula
