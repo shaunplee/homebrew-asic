@@ -12,6 +12,7 @@ class MagicVlsi < Formula
   # So let's not use OpenGL
   # depends_on "mesa" => :build
   # depends_on "mesa-glu" => :build
+  depends_on "python3"
 
   resource "tcl" do
     url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.13/tcl8.6.13-src.tar.gz"
@@ -63,7 +64,9 @@ class MagicVlsi < Formula
            "--x-includes=/usr/X11/include",
            "--x-libraries=/usr/X11/lib",
            "--with-opengl=no", # disable OpenGL
-           "--disable-silent-rules", *std_configure_args
+           "--disable-silent-rules",
+           "PYTHON3=#{Formula["python3"].bin}/python3",
+           *std_configure_args
     ENV["CFLAGS"] = "-Wno-error=implicit-function-declaration"
     system "make"
     system "make", "install"
