@@ -9,31 +9,38 @@ class NgspiceAT36 < Formula
 
     depends_on "autoconf" => :build
     depends_on "automake" => :build
-    depends_on "bison" => :build
     depends_on "libtool" => :build
   end
 
   conflicts_with "ngspice"
 
   depends_on "fftw"
-  depends_on "readline"
+  depends_on "fontconfig"
+  depends_on "freetype"
   depends_on "libx11"
+  depends_on "libxaw"
+  depends_on "libxext"
+  depends_on "libxft"
+  depends_on "libxmu"
+  depends_on "libxrender"
+  depends_on "libxt"
+  depends_on "ncurses"
+  depends_on "readline"
+
+  uses_from_macos "bison" => :build
+  uses_from_macos "flex" => :build
 
   def install
     system "./autogen.sh" if build.head?
 
     args = %W[
-      --disable-dependency-tracking
-      --prefix=#{prefix}
       --with-readline=yes
       --enable-xspice
     ]
 
-    system "./configure", *args
+    ENV["CPPFLAGS"] = " -I#{Formula["freetype"].opt_include}/freetype2"
+    system "./configure", *args, *std_configure_args
     system "make", "install"
-
-    # remove conflict lib files with libngspice
-    rm_rf Dir[lib/"ngspice"]
   end
 
   test do

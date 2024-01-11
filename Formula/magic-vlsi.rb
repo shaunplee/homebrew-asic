@@ -17,7 +17,7 @@ class MagicVlsi < Formula
   depends_on "libxi"
   depends_on "libxmu"
   depends_on "libxrender"
-  depends_on "mesa"
+
   depends_on "python3"
 
   resource "tcl" do
@@ -73,6 +73,11 @@ class MagicVlsi < Formula
       end
     end
 
+    # magic crashes on start with a BadMatch error:
+    ### X Error of failed request:  BadMatch (invalid parameter attributes)
+    ### Major opcode of failed request:  149 (GLX)
+    ### Minor opcode of failed request:  27 (X_GLXCreatePbuffer)
+    # So let's set --with-opengl=no
     system "./configure",
            "--prefix=#{prefix}",
            "--with-tcl=#{prefix}/tcl-tk/lib",
@@ -81,6 +86,7 @@ class MagicVlsi < Formula
            "--x-libraries=/opt/X11/lib",
            "--with-opengl=no", # disable OpenGL
            "--disable-silent-rules",
+
            "CFLAGS=-Wno-implicit-function-declaration",
            "PYTHON3=#{Formula["python3"].bin}/python3",
            *std_configure_args
