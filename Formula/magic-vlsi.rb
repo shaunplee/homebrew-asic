@@ -18,7 +18,7 @@ class MagicVlsi < Formula
   depends_on "libxmu"
   depends_on "libxrender"
 
-  depends_on "python3"
+  depends_on "python3" => :build
 
   resource "tcl" do
     url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.13/tcl8.6.13-src.tar.gz"
