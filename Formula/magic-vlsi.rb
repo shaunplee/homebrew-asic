@@ -13,6 +13,7 @@ class MagicVlsi < Formula
   # So let's not use OpenGL
   # depends_on "mesa" => :build
   # depends_on "mesa-glu" => :build
+  depends_on "libx11"
   depends_on "python3"
 
   resource "tcl" do
