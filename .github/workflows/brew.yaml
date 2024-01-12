@@ -5,6 +5,12 @@ on:
     paths:
     - Formula/*
 
+on:
+  workflow_dispatch
+
+env:
+  HOMEBREW_DEVELOPER: 1
+
 jobs:
   tests:
     runs-on: [macos-13]
