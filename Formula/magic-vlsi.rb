@@ -7,6 +7,10 @@ class MagicVlsi < Formula
   sha256 "ef17c343c89ac54699f87f6c853ec7e4814f322734bd3b54a157a7d95cab905a"
   license "MIT"
 
+  livecheck do
+    url :stable
+  end
+
   depends_on "cairo"
   depends_on "fontconfig"
   depends_on "freetype"
