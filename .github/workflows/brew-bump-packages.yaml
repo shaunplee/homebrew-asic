@@ -1,0 +1,17 @@
+name: brew-bump-packages
+on:
+  workflow_dispatch
+
+jobs:
+  foo:
+    runs-on: [macos-13]    
+    steps:
+      - name: Bump packages
+        uses: Homebrew/actions/bump-packages@master
+        with:
+          # Custom GitHub access token with only the 'public_repo' scope enabled
+          token: ${{secrets.TOKEN}}
+          # Bump only these formulae if outdated
+          formulae: |
+            tcl-tk-with-x
+            magic-vlsi
