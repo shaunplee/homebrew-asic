@@ -13,5 +13,5 @@ jobs:
           token: ${{secrets.TOKEN}}
           # Bump only these formulae if outdated
           formulae: |
-            tcl-tk-with-x
-            magic-vlsi
+            shaunplee/asic/tcl-tk-with-x
+            shaunplee/asic/magic-vlsi
