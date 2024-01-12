@@ -17,12 +17,12 @@ X Error of failed request:  BadMatch (invalid parameter attributes)
   Serial number of failed request:  7801
   Current serial number in output stream:  7801
 ```
-So `magic` is configured `--with-opengl=no` so that we don't have dependencies on `mesa` and `mesa-glu`.
+So `magic` is configured `--with-opengl=no`.
 
 ## tcl-tk-with-x
 This tap includes a copy of Tcl/Tk because the Homebrew version of `tcl-tk` is built `without-x` and Magic needs Tcl/Tk built `with-x`.
 
-This formula is keg only to avoid conflicting with the Homebrew core tcl-tk.
+This formula is keg only to avoid conflicting with the Homebrew core `tcl-tk`.
 
 ## ngspice@36
-Per the Zero to ASIC MPW9 install guide, the ngspice formula builds version 36.
+Per the Zero to ASIC MPW9 install guide, the `ngspice` formula builds version 36.
