@@ -12,7 +12,9 @@ class NgspiceAT36 < Formula
     depends_on "libtool" => :build
   end
 
-  conflicts_with "ngspice"
+  # conflicts_with "ngspice"
+
+  keg_only :versioned_formula
 
   depends_on "fftw"
   depends_on "fontconfig"
@@ -33,7 +35,7 @@ class NgspiceAT36 < Formula
   def install
     system "./autogen.sh" if build.head?
 
-    args = %W[
+    args = %w[
       --with-readline=yes
       --enable-xspice
     ]
