@@ -34,8 +34,6 @@ class MagicVlsi < Formula
     system "./configure",
            "--with-tcl=#{tcltk.opt_prefix}",
            "--with-tk=#{tcltk.opt_prefix}",
-           "--x-includes=/opt/X11/include",
-           "--x-libraries=/opt/X11/lib",
            "--with-opengl=no", # disable OpenGL
            "--disable-silent-rules",
            "CFLAGS=-Wno-implicit-function-declaration",
