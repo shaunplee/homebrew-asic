@@ -5,9 +5,6 @@ on:
     paths:
     - Formula/*
 
-on:
-  workflow_dispatch
-
 env:
   HOMEBREW_DEVELOPER: 1
 
