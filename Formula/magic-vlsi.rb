@@ -11,11 +11,6 @@ class MagicVlsi < Formula
     url :stable
   end
 
-  bottle do
-    rebuild 1
-    sha256 arm64_sonoma: "82af1212d2443e7e8fae177960eceebd0ab409888c7def9e65466090d1f5baa0"
-  end
-
   depends_on "cairo"
   depends_on "fontconfig"
   depends_on "freetype"
