@@ -6,7 +6,7 @@ env:
   HOMEBREW_DEVELOPER: 1
 
 jobs:
-  tests:
+  brew-test-bot:
     runs-on: [macos-13]
     timeout-minutes: 30
     steps:
@@ -26,13 +26,8 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: brew install-bundler-gems
 
-      - run: brew test-bot --only-cleanup-before
-
-      - run: brew test-bot --only-setup
-
-      - run: brew test-bot --only-tap-syntax
-
-      - run: brew test-bot --only-formulae
+      - run: brew test-bot shaunplee/asic/tcl-tk-with-x
+      - run: brew test-bot shaunplee/asic/magic-vlsi
 
       - name: Upload bottles as artifact
         uses: actions/upload-artifact@v3
