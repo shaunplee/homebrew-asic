@@ -4,6 +4,7 @@ on:
     branches-ignore: [master]
     paths:
     - Formula/*
+  pull_request:
 
 env:
   HOMEBREW_DEVELOPER: 1
@@ -43,8 +44,3 @@ jobs:
         with:
           name: bottles
           path: '*.bottle.*'
-
-      # - uses: actions/checkout@v3
-      # - run: |
-      #     brew tap shaunplee/asic-dev .
-      #     make tests/formula
