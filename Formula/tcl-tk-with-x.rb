@@ -12,6 +12,11 @@ class TclTkWithX < Formula
     regex(%r{url=.*?/(?:tcl|tk).?v?(\d+(?:\.\d+)+)[._-]src\.t}i)
   end
 
+  bottle do
+    rebuild 1
+    sha256 arm64_sonoma: "67442fc711e62c3636ec03a44255de8890b3644ef6d33e375c5b7114aaf6fc45"
+  end
+
   keg_only "to avoid conflicts with homebrew core/tcl-tk"
 
   depends_on "libx11"
