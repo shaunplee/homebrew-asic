@@ -4,14 +4,14 @@ on:
 
 jobs:
   foo:
-    runs-on: [macos-13]    
+    runs-on: [macos-13]
     steps:
       - name: Bump packages
-        uses: Homebrew/actions/bump-packages@master
+        uses: dawidd6/action-homebrew-bump-formula@v3
         with:
-          # Custom GitHub access token with only the 'public_repo' scope enabled
+          # Custom GitHub access token with the 'public_repo' and 'workflow' scopes enabled
           token: ${{secrets.TOKEN}}
+          tap: shaunplee/asic
           # Bump only these formulae if outdated
-          formulae: |
-            shaunplee/asic/tcl-tk-with-x
-            shaunplee/asic/magic-vlsi
+          formula: magic-vlsi, tcl-tk-with-x
+          livecheck: true
