@@ -1,8 +1,9 @@
 class TclTkWithX < Formula
   desc "Tool Command Language"
   homepage "https://www.tcl-lang.org"
-  url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.12/tcl8.6.12-src.tar.gz"
-  mirror "https://fossies.org/linux/misc/tcl8.6.12-src.tar.gz"
+  url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.13/tcl8.6.13-src.tar.gz"
+  mirror "https://fossies.org/linux/misc/tcl8.6.13-src.tar.gz"
+  sha256 "43a1fae7412f61ff11de2cfd05d28cfc3a73762f354a417c62370a54e2caf066"
   license "TCL"
   revision 5
 
