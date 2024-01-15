@@ -12,7 +12,7 @@ class TclTkWithX < Formula
     regex(%r{url=.*?/(?:tcl|tk).?v?(\d+(?:\.\d+)+)[._-]src\.t}i)
   end
 
-  keg_only "to avoid conflicts with homebrew core/tcl-tk"
+  keg_only "it conflicts with homebrew core/tcl-tk"
 
   depends_on "libx11"
 
