@@ -1,7 +1,5 @@
 # homebrew-asic
 
-## What is this?
-
 This is a Homebrew tap for various ASIC design tools, as used in the Zero to ASIC Course: https://www.zerotoasiccourse.com/
 
 ## Magic
@@ -25,4 +23,4 @@ This tap includes a copy of Tcl/Tk because the Homebrew version of `tcl-tk` is b
 This formula is keg only to avoid conflicting with the Homebrew core `tcl-tk`.
 
 ## ngspice@36
-Per the Zero to ASIC MPW9 install guide, the `ngspice` formula builds version 36.
+Per the Zero to ASIC MPW9 install guide, the keg only `ngspice@36` formula builds version 36. To add this to your path, run `brew link ngspice@36` after installing.
