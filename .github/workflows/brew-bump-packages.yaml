@@ -1,6 +1,6 @@
 name: brew-bump-packages
 on:
-  workflow dispatch:
+  workflow_dispatch:
 
   schedule:
     # * is a special character in YAML so you have to quote this string
