@@ -26,11 +26,15 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: brew install-bundler-gems
 
-      - run: brew test-bot shaunplee/asic/tcl-tk-with-x --publish --build-dependents-from-source
-      - run: brew test-bot shaunplee/asic/magic-vlsi --publish --build-dependents-from-source
+      - run: brew test-bot shaunplee/asic/tcl-tk-with-x --build-dependents-from-source
+
+      - run: brew test-bot shaunplee/asic/magic-vlsi --build-dependents-from-source
 
       - name: Upload bottles as artifact
         uses: actions/upload-artifact@v3
         with:
           name: bottles
           path: '*.bottle.*'
+
+      - run: brew test-bot shaunplee/asic/magic-vlsi --publish
+      - run: brew test-bot shaunplee/asic/tcl-tk-with-x --publish
