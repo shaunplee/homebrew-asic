@@ -28,7 +28,11 @@ jobs:
 
       - run: brew test-bot shaunplee/asic/tcl-tk-with-x --build-dependents-from-source
 
+      - run: brew pr-upload --root-url https://github.com/shaunplee/homebrew-asic/releases/
+
       - run: brew test-bot shaunplee/asic/magic-vlsi --build-dependents-from-source
+
+      - run: brew pr-upload --root-url https://github.com/shaunplee/homebrew-asic/releases/
 
       - name: Upload bottles as artifact
         uses: actions/upload-artifact@v3
