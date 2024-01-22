@@ -35,7 +35,7 @@ jobs:
 
       - run: brew test-bot --only-tap-syntax
 
-      - run: brew test-bot --only-formulae
+      - run: brew test-bot --only-formulae --build-dependents-from-source --skip-recursive-dependents
         if: github.event_name == 'pull_request'
 
       - name: Upload bottles as artifact
