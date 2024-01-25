@@ -58,15 +58,10 @@ jobs:
       - run: brew typecheck
 
   update-test:
-    name: ${{ matrix.name }}
-    runs-on: ${{ matrix.runs-on }}
+    name: update test on macos-13
+    runs-on: macos-13
     needs: syntax
     if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    strategy:
-      matrix:
-        include:
-          - name: update-test (macOS 13)
-            runs-on: macos-13
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -83,15 +78,9 @@ jobs:
           brew update-test --commit=HEAD
 
   tests:
-    name: ${{ matrix.name }}
+    name: tests on macos-13
     needs: syntax
-    runs-on: ${{ matrix.runs-on }}
-    strategy:
-      matrix:
-        include:
-          - name: tests (macOS 13)
-            test-flags: --coverage
-            runs-on: macos-13
+    runs-on: macos-13
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
