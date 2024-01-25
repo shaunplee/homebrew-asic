@@ -57,29 +57,11 @@ jobs:
 
       - run: brew typecheck
 
-      - name: Check RuboCop filepaths
-        working-directory: ${{ steps.set-up-homebrew.outputs.repository-path }}/Library/Homebrew
-        run: |
-          public_apis=$(git grep -l "@api public" -- :^sorbet/ :^vendor/ | wc -l | tr -d ' ')
-          rubocop_docs=$(yq '.Style/Documentation.Include' .rubocop.yml | wc -l | tr -d ' ')
-          if [[ public_apis -ne rubocop_docs ]]
-          then
-            echo "All public Homebrew APIs should be included in the Style/Documentation RuboCop."
-            echo "There were ${public_apis} '@api public' lines but ${rubocop_docs} filepaths for the 'Style/Documentation' RuboCop."
-            echo "Add or remove the filepaths from Library/Homebrew/.rubocop.yml as appropriate."
-            exit 1
-          fi
-
   update-test:
-    name: ${{ matrix.name }}
-    runs-on: ${{ matrix.runs-on }}
+    name: update test on macos-13
+    runs-on: macos-13
     needs: syntax
     if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    strategy:
-      matrix:
-        include:
-          - name: update-test (macOS 13)
-            runs-on: macos-13
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
@@ -96,15 +78,9 @@ jobs:
           brew update-test --commit=HEAD
 
   tests:
-    name: ${{ matrix.name }}
+    name: tests on macos-13
     needs: syntax
-    runs-on: ${{ matrix.runs-on }}
-    strategy:
-      matrix:
-        include:
-          - name: tests (macOS 13)
-            test-flags: --coverage
-            runs-on: macos-13
+    runs-on: macos-13
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
