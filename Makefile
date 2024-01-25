@@ -1,6 +1,7 @@
 define make-formula
 .PHONY: tests/formula/$(1) $(1).rb
 tests/formula/$(1): $(1).rb
+	brew unlink python
 	brew install --adopt shaunplee/asic-dev/$(1)
 endef
 
