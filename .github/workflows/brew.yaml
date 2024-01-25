@@ -56,4 +56,7 @@ jobs:
 
       - run: |
           brew tap shaunplee/asic-dev .
+          # Workaround GitHub Actions Python issues
+          # taken from https://github.com/Homebrew/brew/blob/master/.github/workflows/tests.yml
+          brew unlink python && brew link --overwrite python
           make tests/formula
