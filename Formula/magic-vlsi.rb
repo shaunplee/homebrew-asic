@@ -22,6 +22,7 @@ class MagicVlsi < Formula
   depends_on "libxmu"
   depends_on "libxrender"
   depends_on :macos
+  depends_on "python3"
   depends_on "shaunplee/asic/tcl-tk-with-x"
 
   def install
