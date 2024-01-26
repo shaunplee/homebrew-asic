@@ -1,168 +1,40 @@
-name: CI
-
+name: brew test-bot
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
-  merge_group:
-
-permissions:
-  contents: read
-
-env:
-  HOMEBREW_DEVELOPER: 1
-  HOMEBREW_NO_AUTO_UPDATE: 1
-  HOMEBREW_NO_ENV_HINTS: 1
-  HOMEBREW_BOOTSNAP: 1
-  HOMEBREW_NO_INSTALL_CLEANUP: 1
-
-concurrency:
-  group: "${{ github.ref }}"
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
-
 jobs:
-  syntax:
-    runs-on: macos-13
+  test-bot:
+    strategy:
+      matrix:
+        os: [ubuntu-22.04, macos-13]
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
-        with:
-          core: false
-          cask: false
-          test-bot: false
 
-      - name: Cache Bundler RubyGems
-        uses: actions/cache@v4
+      - name: Cache Homebrew Bundler RubyGems
+        id: cache
+        uses: actions/cache@v3
         with:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ runner.os }}-rubygems-syntax-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ runner.os }}-rubygems-syntax-
+          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+          restore-keys: ${{ runner.os }}-rubygems-
 
-      - name: Install Bundler RubyGems
-        run: brew install-bundler-gems --groups=style,typecheck
+      - run: brew test-bot --only-cleanup-before
 
-      - name: Install shellcheck and shfmt
-        run: brew install shellcheck shfmt
+      - run: brew test-bot --only-setup
 
-      - name: Cache style cache
-        uses: actions/cache@v4
+      - run: brew test-bot --only-tap-syntax
+
+      - run: brew test-bot --only-formulae
+        if: github.event_name == 'pull_request'
+
+      - name: Upload bottles as artifact
+        if: always() && github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v3
         with:
-          path: ~/.cache/Homebrew/style
-          key: syntax-style-cache-${{ github.sha }}
-          restore-keys: syntax-style-cache-
-
-      - run: brew style
-
-      - run: brew typecheck
-
-  update-test:
-    name: update test on macos-13
-    runs-on: macos-13
-    needs: syntax
-    if: github.event_name == 'pull_request' || github.event_name == 'merge_group'
-    steps:
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-        with:
-          core: false
-          cask: false
-          test-bot: false
-
-      - name: Run brew update-tests
-        run: |
-          brew update-test
-          brew update-test --to-tag
-          brew update-test --commit=HEAD
-
-  tests:
-    name: tests on macos-13
-    needs: syntax
-    runs-on: macos-13
-    steps:
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
-        with:
-          core: true
-          cask: false
-          test-bot: false
-
-      - name: Cache Bundler RubyGems
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ matrix.runs-on }}-tests-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ matrix.runs-on }}-tests-rubygems-
-
-      - run: brew config
-
-      - name: Install Bundler RubyGems
-        run: brew install-bundler-gems --groups=all
-
-      - name: Create parallel test log directory
-        run: mkdir tests
-
-      - name: Cache parallel tests log
-        uses: actions/cache@v4
-        with:
-          path: tests
-          key: ${{ runner.os }}-${{ matrix.test-flags }}-parallel_runtime_rspec-${{ github.sha }}
-          restore-keys: ${{ runner.os }}-${{ matrix.test-flags }}-parallel_runtime_rspec-
-
-      - name: Install brew tests dependencies
-        if: matrix.name != 'tests (generic OS)'
-        run: brew install buildpulse-test-reporter
-
-      - name: Install brew tests --online dependencies
-        if: matrix.name == 'tests (online)'
-        run: brew install subversion curl
-
-      - name: Install brew tests macOS dependencies
-        if: runner.os != 'Linux'
-        run: |
-          # Workaround GitHub Actions Python issues
-          brew unlink python && brew link --overwrite python
-          brew install subversion
-
-        # brew tests doesn't like world writable directories
-      - name: Cleanup permissions
-        if: runner.os == 'Linux'
-        run: sudo chmod -R g-w,o-w /home/linuxbrew/.linuxbrew/Homebrew
-
-      - name: Run brew tests
-        if: github.event_name == 'pull_request' || matrix.name != 'tests (online)'
-        run: |
-          # brew tests
-
-          # Don't attempt to use BuildPulse for generic tests.
-          # Fails for no apparent reason.
-          if [[ "${{ matrix.name }}" =~ "generic" ]]
-          then
-            unset HOMEBREW_BUILDPULSE_ACCESS_KEY_ID
-          fi
-
-          # Retry multiple times when using BuildPulse to detect and submit
-          # flakiness (because rspec-retry is disabled).
-          if [[ -n "${HOMEBREW_BUILDPULSE_ACCESS_KEY_ID}" ]]
-          then
-            brew tests ${{ matrix.test-flags }} ||
-            brew tests ${{ matrix.test-flags }}
-          else
-            brew tests ${{ matrix.test-flags }}
-          fi
-        env:
-          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # These cannot be queried at the macOS level on GitHub Actions.
-          HOMEBREW_LANGUAGES: en-GB
-          HOMEBREW_BUILDPULSE_ACCESS_KEY_ID: ${{ secrets.BUILDPULSE_ACCESS_KEY_ID }}
-          HOMEBREW_BUILDPULSE_SECRET_ACCESS_KEY: ${{ secrets.BUILDPULSE_SECRET_ACCESS_KEY }}
-          HOMEBREW_BUILDPULSE_ACCOUNT_ID: 1503512
-          HOMEBREW_BUILDPULSE_REPOSITORY_ID: 53238813
-
-      - uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d
-        with:
-          root_dir: ${{ steps.set-up-homebrew.outputs.repository-path }}
-          files: Library/Homebrew/test/coverage/coverage.xml
+          name: bottles
+          path: '*.bottle.*'
