@@ -31,7 +31,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: brew install-bundler-gems
 
-      - run: brew test-bot shaunplee/asic/tcl-tk-with-x --build-dependents-from-source
+      - run: brew test-bot shaunplee/asic/tcl-tk-with-x --build-dependents-from-source --skip-recursive-dependents --root-url="https://ghcr.io/v2/shaunplee/asic"
 
       - run: brew pr-upload --root-url="https://ghcr.io/v2/shaunplee/asic"
 
