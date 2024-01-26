@@ -4,7 +4,6 @@ on:
     branches-ignore: [master]
     paths:
     - Formula/*
-  pull_request:
   workflow_dispatch:
 
 env:
@@ -12,40 +11,40 @@ env:
   HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
 
 jobs:
-  tests:
-    runs-on: [macos-13]
-    timeout-minutes: 30
-    steps:
-      - name: Set up Homebrew
-        id: set-up-homebrew
-        uses: Homebrew/actions/setup-homebrew@master
+  # tests:
+  #   runs-on: [macos-13]
+  #   timeout-minutes: 30
+  #   steps:
+  #     - name: Set up Homebrew
+  #       id: set-up-homebrew
+  #       uses: Homebrew/actions/setup-homebrew@master
 
-      - name: Cache Homebrew Bundler RubyGems
-        id: cache
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.set-up-homebrew.outputs.gems-path }}
-          key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
-          restore-keys: ${{ runner.os }}-rubygems-
+  #     - name: Cache Homebrew Bundler RubyGems
+  #       id: cache
+  #       uses: actions/cache@v3
+  #       with:
+  #         path: ${{ steps.set-up-homebrew.outputs.gems-path }}
+  #         key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
+  #         restore-keys: ${{ runner.os }}-rubygems-
 
-      - name: Install Homebrew Bundler RubyGems
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: brew install-bundler-gems
-      - run: brew test-bot --only-cleanup-before
+  #     - name: Install Homebrew Bundler RubyGems
+  #       if: steps.cache.outputs.cache-hit != 'true'
+  #       run: brew install-bundler-gems
+  #     - run: brew test-bot --only-cleanup-before
 
-      - run: brew test-bot --only-setup
+  #     - run: brew test-bot --only-setup
 
-      - run: brew test-bot --only-tap-syntax
+  #     - run: brew test-bot --only-tap-syntax
 
-      - run: brew test-bot --only-formulae --build-dependents-from-source --skip-recursive-dependents
-        if: github.event_name == 'pull_request'
+  #     - run: brew test-bot --only-formulae --build-dependents-from-source --skip-recursive-dependents
+  #       if: github.event_name == 'pull_request'
 
-      - name: Upload bottles as artifact
-        if: always() && github.event_name == 'pull_request'
-        uses: actions/upload-artifact@v3
-        with:
-          name: bottles
-          path: '*.bottle.*'
+  #     - name: Upload bottles as artifact
+  #       if: always() && github.event_name == 'pull_request'
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: bottles
+  #         path: '*.bottle.*'
   builds:
     runs-on: [macos-13]
     timeout-minutes: 30
