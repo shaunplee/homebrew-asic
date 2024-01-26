@@ -27,6 +27,9 @@ jobs:
           PULL_REQUEST: ${{ github.event.pull_request.number }}
         run: brew pr-pull --debug --tap=$GITHUB_REPOSITORY $PULL_REQUEST
 
+      - name: Upload release
+        run: brew pr-upload
+
       - name: Push commits
         uses: Homebrew/actions/git-try-push@master
         with:
