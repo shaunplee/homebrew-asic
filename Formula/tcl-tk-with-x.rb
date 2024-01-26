@@ -12,6 +12,11 @@ class TclTkWithX < Formula
     regex(%r{url=.*?/(?:tcl|tk).?v?(\d+(?:\.\d+)+)[._-]src\.t}i)
   end
 
+  bottle do
+    root_url "https://github.com/shaunplee/homebrew-asic/releases/download/tcl-tk-with-x-8.6.13_8"
+    sha256 ventura: "a255d4ecf209884368e0ccb0c2fb1c9b3c2200ac5636f5d31ca7421320defc2a"
+  end
+
   keg_only "it conflicts with homebrew core/tcl-tk"
 
   depends_on "libx11"
