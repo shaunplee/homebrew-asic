@@ -27,15 +27,15 @@ jobs:
           PULL_REQUEST: ${{ github.event.pull_request.number }}
         run: brew pr-pull --debug --tap=$GITHUB_REPOSITORY $PULL_REQUEST
 
-      - name: Download artifact
-        uses: Homebrew/actions/download-artifact@master
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          workflow: tests.yml
-          name: bottles
+      # - name: Download artifact
+      #   uses: Homebrew/actions/download-artifact@master
+      #   with:
+      #     github_token: ${{secrets.GITHUB_TOKEN}}
+      #     workflow: tests.yml
+      #     name: bottles
 
-      - name: Upload release
-        run: brew pr-upload
+      # - name: Upload release
+      #   run: brew pr-upload
 
       - name: Push commits
         uses: Homebrew/actions/git-try-push@master
