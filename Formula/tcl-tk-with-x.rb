@@ -13,8 +13,8 @@ class TclTkWithX < Formula
   end
 
   bottle do
-    root_url "https://github.com/shaunplee/homebrew-asic/releases/download/tcl-tk-with-x-8.6.13_9"
-    sha256 ventura: "3e5a5bcd2f0f423afab3c2f98783ed7956c0d259a7750024e23ebc396ff7a3ae"
+    root_url "https://github.com/shaunplee/homebrew-asic/releases/download/tcl-tk-with-x-8.6.13_10"
+    sha256 ventura: "71015590462d315553d4a662bd447d4ece1d0fe3becb21f46c631d72d5017b38"
   end
 
   keg_only "it conflicts with homebrew core/tcl-tk"
