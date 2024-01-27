@@ -12,7 +12,7 @@ env:
 
 jobs:
   # tests:
-  #   runs-on: [macos-13]
+  #   runs-on: [macos-latest]
   #   timeout-minutes: 30
   #   steps:
   #     - name: Set up Homebrew
@@ -46,7 +46,7 @@ jobs:
   #         name: bottles
   #         path: '*.bottle.*'
   builds:
-    runs-on: [macos-13]
+    runs-on: macos-latest
     timeout-minutes: 30
     steps:
       - name: Set up Homebrew
