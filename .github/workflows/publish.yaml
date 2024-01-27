@@ -27,12 +27,6 @@ jobs:
           PULL_REQUEST: ${{ github.event.pull_request.number }}
         run: brew pr-pull --debug --tap=$GITHUB_REPOSITORY $PULL_REQUEST
 
-      - name: Push commits
-        uses: Homebrew/actions/git-try-push@master
-        with:
-          token: ${{ github.token }}
-          branch: main
-
       - name: Download artifact
         uses: Homebrew/actions/download-artifact@master
         with:
@@ -42,6 +36,12 @@ jobs:
 
       - name: Upload release
         run: brew pr-upload
+
+      - name: Push commits
+        uses: Homebrew/actions/git-try-push@master
+        with:
+          token: ${{ github.token }}
+          branch: main
 
       - name: Delete branch
         if: github.event.pull_request.head.repo.fork == false
