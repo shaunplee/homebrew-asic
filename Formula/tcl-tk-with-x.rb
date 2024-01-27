@@ -5,7 +5,7 @@ class TclTkWithX < Formula
   mirror "https://fossies.org/linux/misc/tcl8.6.13-src.tar.gz"
   sha256 "43a1fae7412f61ff11de2cfd05d28cfc3a73762f354a417c62370a54e2caf066"
   license "TCL"
-  revision 9
+  revision 10
 
   livecheck do
     url :stable
@@ -13,8 +13,8 @@ class TclTkWithX < Formula
   end
 
   bottle do
-    root_url "https://github.com/shaunplee/homebrew-asic/releases/download/tcl-tk-with-x-8.6.13_9"
-    sha256 ventura: "3e5a5bcd2f0f423afab3c2f98783ed7956c0d259a7750024e23ebc396ff7a3ae"
+    root_url "https://github.com/shaunplee/homebrew-asic/releases/download/tcl-tk-with-x-8.6.13_10"
+    sha256 ventura: "71015590462d315553d4a662bd447d4ece1d0fe3becb21f46c631d72d5017b38"
   end
 
   keg_only "it conflicts with homebrew core/tcl-tk"
