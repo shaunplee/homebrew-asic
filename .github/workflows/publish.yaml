@@ -38,6 +38,7 @@ jobs:
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
           workflow: tests.yml
+          name: bottles
 
       - name: Upload release
         run: brew pr-upload
