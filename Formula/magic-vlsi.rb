@@ -23,11 +23,12 @@ class MagicVlsi < Formula
   depends_on "libxrender"
   depends_on :macos
   depends_on "python3"
-  depends_on "shaunplee/asic/tcl-tk-with-x"
+  depends_on "shaunplee/asic/tk-with-x"
 
   def install
     ENV.deparallelize
-    tcltk = Formula["shaunplee/asic/tcl-tk-with-x"]
+    tcl = Formula["shaunplee/asic/tcl"]
+    tk = Formula["shaunplee/asic/tk-with-x"]
     virtualenv_create(libexec, "python3")
 
     # magic crashes on start with a BadMatch error:
@@ -36,8 +37,8 @@ class MagicVlsi < Formula
     ### Minor opcode of failed request:  27 (X_GLXCreatePbuffer)
     # So let's set --with-opengl=no
     system "./configure",
-           "--with-tcl=#{tcltk.opt_prefix}",
-           "--with-tk=#{tcltk.opt_prefix}",
+           "--with-tcl=#{tcl.opt_prefix}",
+           "--with-tk=#{tk.opt_prefix}",
            "--with-opengl=no", # disable OpenGL
            "--disable-silent-rules",
            "CFLAGS=-Wno-implicit-function-declaration",
