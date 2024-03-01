@@ -5,6 +5,7 @@ class TclTkWithX < Formula
   mirror "https://fossies.org/linux/misc/tcl8.6.14-src.tar.gz"
   sha256 "5880225babf7954c58d4fb0f5cf6279104ce1cd6aa9b71e9a6322540e1c4de66"
   license "TCL"
+  revision 1
 
   livecheck do
     url :stable
@@ -21,9 +22,9 @@ class TclTkWithX < Formula
   depends_on "libx11"
 
   resource "tk" do
-    url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.13/tk8.6.13-src.tar.gz"
-    mirror "https://fossies.org/linux/misc/tk8.6.13-src.tar.gz"
-    sha256 "2e65fa069a23365440a3c56c556b8673b5e32a283800d8d9b257e3f584ce0675"
+    url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.14/tk8.6.14-src.tar.gz"
+    mirror "https://fossies.org/linux/misc/tk8.6.14-src.tar.gz"
+    sha256 "8ffdb720f47a6ca6107eac2dd877e30b0ef7fac14f3a84ebbd0b3612cee41a94"
   end
 
   def install
