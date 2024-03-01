@@ -26,9 +26,11 @@ class TkWithX < Formula
 
     ENV.prepend_path "PATH", bin
 
+    tcl = Formula["shaunplee/asic/tcl"]
+
     cd "unix" do
       system "./configure", *args,
-             "--with-tcl=#{lib}",
+             "--with-tcl=#{tcl.opt_prefix}/lib",
              "--with-x"
       inreplace "Makefile",
                 /^LIB_RUNTIME_DIR[^\n]*$/,
