@@ -22,9 +22,9 @@ So `magic` is configured `--with-opengl=no`.
 ## Tcl/Tk with X
 This tap includes a copy of Tcl/Tk because the Homebrew version of `tcl-tk` is built `without-x` and Magic needs Tk built `with-x`.
 
-This is split into to formulae so that Tk and Tcl both get bumped automatically.
+This is split into two formulae so that Tk and Tcl both get bumped automatically.
 
-This formula is keg only to avoid conflicting with the Homebrew core `tcl-tk`.
+These formulae are keg only to avoid conflicting with the Homebrew core `tcl-tk`.
 
 ## ngspice@36
 Per the Zero to ASIC MPW9 install guide, the keg only `ngspice@36` formula builds version 36. To add this to your path, run `brew link ngspice@36` after installing.
