@@ -19,8 +19,10 @@ X Error of failed request:  BadMatch (invalid parameter attributes)
 ```
 So `magic` is configured `--with-opengl=no`.
 
-## tcl-tk-with-x
-This tap includes a copy of Tcl/Tk because the Homebrew version of `tcl-tk` is built `without-x` and Magic needs Tcl/Tk built `with-x`.
+## Tcl/Tk with X
+This tap includes a copy of Tcl/Tk because the Homebrew version of `tcl-tk` is built `without-x` and Magic needs Tk built `with-x`.
+
+This is split into to formulae so that Tk and Tcl both get bumped automatically.
 
 This formula is keg only to avoid conflicting with the Homebrew core `tcl-tk`.
 
