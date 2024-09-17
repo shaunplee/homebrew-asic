@@ -1,11 +1,10 @@
 class Tcl < Formula
   desc "Tool Command Language"
   homepage "https://www.tcl-lang.org"
-  url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.14/tcl8.6.14-src.tar.gz"
-  mirror "https://fossies.org/linux/misc/tcl8.6.14-src.tar.gz"
-  sha256 "5880225babf7954c58d4fb0f5cf6279104ce1cd6aa9b71e9a6322540e1c4de66"
+  url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.15/tcl8.6.15-src.tar.gz"
+  mirror "https://fossies.org/linux/misc/tcl8.6.15-src.tar.gz"
+  sha256 "861e159753f2e2fbd6ec1484103715b0be56be3357522b858d3cbb5f893ffef1"
   license "TCL"
-  revision 1
 
   livecheck do
     url :stable
