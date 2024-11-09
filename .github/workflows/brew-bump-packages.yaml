@@ -16,14 +16,14 @@ jobs:
 
       - name: Cache Homebrew Bundler RubyGems
         id: cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.set-up-homebrew.outputs.gems-path }}
           key: ${{ runner.os }}-rubygems-${{ steps.set-up-homebrew.outputs.gems-hash }}
           restore-keys: ${{ runner.os }}-rubygems-
 
       - name: Bump packages
-        uses: dawidd6/action-homebrew-bump-formula@v3
+        uses: dawidd6/action-homebrew-bump-formula@v4
         with:
           # Custom GitHub access token with the 'public_repo' and 'workflow' scopes enabled
           token: ${{secrets.PA_TOKEN}}
