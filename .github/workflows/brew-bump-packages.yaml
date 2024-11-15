@@ -29,5 +29,7 @@ jobs:
           token: ${{secrets.PA_TOKEN}}
           tap: shaunplee/asic
           # Bump only these formulae if outdated
-          formula: magic-vlsi, tcl, tk-with-x
+          # -- stop bumping tcl/tk-with-x until upstream starts using 9.0
+          # formula: magic-vlsi, tcl, tk-with-x
+          formula: magic-vlsi
           livecheck: true
