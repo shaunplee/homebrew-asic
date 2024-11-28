@@ -1,9 +1,9 @@
 class TkWithX < Formula
   desc "Tk user interface toolkit"
   homepage "https://www.tcl-lang.org"
-  url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.15/tk8.6.15-src.tar.gz"
-  mirror "https://fossies.org/linux/misc/tk8.6.15-src.tar.gz"
-  sha256 "550969f35379f952b3020f3ab7b9dd5bfd11c1ef7c9b7c6a75f5c49aca793fec"
+  url "https://downloads.sourceforge.net/project/tcl/Tcl/9.0.0/tk9.0.0-src.tar.gz"
+  mirror "https://fossies.org/linux/misc/tk9.0.0-src.tar.gz"
+  sha256 "f166e3c20773c82243f753cef4b091d05267cb7f87da64be88cb2ca5a2ba027e"
   license "TCL"
 
   livecheck do
