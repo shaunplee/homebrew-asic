@@ -1,9 +1,9 @@
 class Tcl < Formula
   desc "Tool Command Language"
   homepage "https://www.tcl-lang.org"
-  url "https://downloads.sourceforge.net/project/tcl/Tcl/8.6.15/tcl8.6.15-src.tar.gz"
-  mirror "https://fossies.org/linux/misc/tcl8.6.15-src.tar.gz"
-  sha256 "861e159753f2e2fbd6ec1484103715b0be56be3357522b858d3cbb5f893ffef1"
+  url "https://downloads.sourceforge.net/project/tcl/Tcl/9.0.0/tcl9.0.0-src.tar.gz"
+  mirror "https://fossies.org/linux/misc/tcl9.0.0-src.tar.gz"
+  sha256 "3bfda6dbaee8e9b1eeacc1511b4e18a07a91dff82d9954cdb9c729d8bca4bbb7"
   license "TCL"
 
   livecheck do
