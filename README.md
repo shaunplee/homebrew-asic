@@ -1,6 +1,6 @@
 # homebrew-asic
 
-This is a Homebrew tap for various ASIC design tools, as used in the Zero to ASIC Course: https://www.zerotoasiccourse.com/
+This is a Homebrew tap for MacOS versions of various ASIC design tools, as used in the Zero to ASIC Course: https://www.zerotoasiccourse.com/
 
 Before you start, make sure your copy of Xcode is up to date and that you've run `xcode-select --install` to install the Command Line Tools.
 
