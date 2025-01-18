@@ -2,7 +2,10 @@
 
 This is a Homebrew tap for MacOS versions of various ASIC design tools, as used in the Zero to ASIC Course: https://www.zerotoasiccourse.com/
 
-Before you start, make sure your copy of Xcode is up to date and that you've run `xcode-select --install` to install the Command Line Tools.
+Before you start, make sure your copy of Xcode is up to date and that you've run `xcode-select --install` to install the Command Line Tools, then you can:
+```
+brew tap shaunplee/asic
+```
 
 ## Magic
 https://github.com/RTimothyEdwards/magic
@@ -19,6 +22,11 @@ X Error of failed request:  BadMatch (invalid parameter attributes)
 ```
 So `magic` is configured `--with-opengl=no`.
 
+To install `magic`:
+```
+brew install magic-vlsi
+```
+
 ## Tcl/Tk with X
 This tap includes a copy of Tcl/Tk because the Homebrew version of `tcl-tk` is built `without-x` and Magic needs Tk built `with-x`.
 
@@ -26,5 +34,12 @@ This is split into two formulae so that Tk and Tcl both get bumped automatically
 
 These formulae are keg only to avoid conflicting with the Homebrew core `tcl-tk`.
 
+These are installed automatically as dependencies of `magic-vlsi`
+
 ## ngspice@36
+To install `ngspice` from this repository:
+```
+brew install ngspice@36
+```
+
 Per the Zero to ASIC MPW9 install guide, the keg only `ngspice@36` formula builds version 36. To add this to your path, run `brew link ngspice@36` after installing.
