@@ -43,7 +43,7 @@ jobs:
       # - run: brew pr-upload --root-url https://github.com/shaunplee/homebrew-asic/releases/
 
       - name: Upload bottles as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bottles
           path: '*.bottle.*'
