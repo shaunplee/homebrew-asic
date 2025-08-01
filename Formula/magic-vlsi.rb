@@ -6,6 +6,7 @@ class MagicVlsi < Formula
   url "https://github.com/RTimothyEdwards/magic/archive/refs/tags/8.3.534.tar.gz"
   sha256 "09d5de60ab3cd81a9dbd4e1d1c384de2cf1137c40790511c45bb2029e73b2bee"
   license "MIT"
+  revision 1
 
   livecheck do
     url :stable
@@ -23,6 +24,7 @@ class MagicVlsi < Formula
   depends_on "libxrender"
   depends_on :macos
   depends_on "python3"
+  depends_on "gnu-sed"
   depends_on "shaunplee/asic/tk-with-x"
 
   def install
