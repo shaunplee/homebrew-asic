@@ -14,6 +14,7 @@ class MagicVlsi < Formula
   depends_on "cairo"
   depends_on "fontconfig"
   depends_on "freetype"
+  depends_on "gnu-sed"
   depends_on "libglu"
   depends_on "libice"
   depends_on "libx11"
@@ -22,7 +23,6 @@ class MagicVlsi < Formula
   depends_on "libxmu"
   depends_on "libxrender"
   depends_on :macos
-  depends_on "gnu-sed"
   depends_on "python3"
   depends_on "shaunplee/asic/tk-with-x"
 
