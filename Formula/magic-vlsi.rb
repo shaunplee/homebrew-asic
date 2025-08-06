@@ -3,8 +3,8 @@ class MagicVlsi < Formula
 
   desc "VLSI layout tool written in Tcl"
   homepage "http://opencircuitdesign.com/magic/"
-  url "https://github.com/RTimothyEdwards/magic/archive/refs/tags/8.3.535.tar.gz"
-  sha256 "69775d11d18957e645017e9665a4a85a0cae13617c126970d9781817245fbea8"
+  url "https://github.com/RTimothyEdwards/magic/archive/refs/tags/8.3.536.tar.gz"
+  sha256 "fd5e728e3770772c86be7c5bc1ed2108c955ad81050ab8ab9710f4c454ebdbe4"
   license "MIT"
 
   livecheck do
